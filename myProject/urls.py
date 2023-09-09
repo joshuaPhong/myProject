@@ -23,5 +23,5 @@ urlpatterns = [
     # use django authentication urls
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('pages.urls')),
-    path('articles/', include('articles.urls'))
+    path('articles/', include('articles.urls')),
 ]
