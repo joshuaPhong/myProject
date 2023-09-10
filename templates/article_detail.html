@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{{ object.title }}</h1>
+                <p>By: {{ object.author }} | {{ object.date }}</p>
+                <p>{{ object.body }}</p>
+            </div>
+            <div>
+                <a href="{% url 'article_update' article.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'article_list' %}" class="btn btn-default">All Articles</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
