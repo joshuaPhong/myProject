@@ -5,23 +5,35 @@
 {% block title %}Articles List{% endblock %}
 
 {% block content %}
-    Hello
-
-    {% for article in article_list %}
+    <div class="container bg-secondary">
+        <h1 class="display-3 text-center">Articles List</h1>
+        {% for article in article_list %}
+            {% if forloop.first %}
+                <div class="row mx-auto">
+            {% endif %}
         {#    html display content#}
         {#        bootstrap card#}
-        <div class="card" style="width: 18rem;">
+        <div class="card m-2 mb-3 " style="width: 45%;">
             <div class="card-body">
                 <h5 class="card-title">{{ article.title }}</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ article.author }} | {{ article.date }}</h6>
                 <p class="card-text">{{ article.body }}</p>
-                <a href="{% url 'home' %}" class="card-link">Home</a>
-                <a href="{% url 'article_update' article.pk %}" class="card-link">Edit</a>
-                <a href="{% url 'article_delete' article.pk %}" class="card-link">Delete</a>
+                <a class="d-inline card link btn btn-outline-secondary text-decoration-none p-2 m-2"
+                   href="{% url 'home' %}">Home</a>
+                <a href="{% url 'article_update' article.pk %}"
+                   class="d-inline card-link btn btn-outline-secondary text-decoration-none p-2 m-2">Edit</a>
+                <a href="{% url 'article_delete' article.pk %}"
+                   class="d-inline card-link btn btn-outline-secondary text-decoration-none p-2 m-2">Delete</a>
             </div>
         </div>
-
-    {% endfor %}
-
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row mx-auto">
+        {% endif %}
+            {% if forloop.last %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
