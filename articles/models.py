@@ -20,7 +20,8 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, related_name='comments',
+                                on_delete=models.CASCADE)
     comment = models.CharField(max_length=140)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
@@ -29,4 +30,4 @@ class Comment(models.Model):
         return self.comment
 
     def get_absolute_url(self):
-        return reverse('article_list')
+        return reverse('article_detail', kwargs={'pk': self.article.pk})

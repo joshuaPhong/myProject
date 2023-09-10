@@ -15,9 +15,19 @@
         {#        bootstrap card#}
         <div class="card m-2 mb-3 " style="width: 45%;">
             <div class="card-body">
-                <h5 class="card-title">{{ article.title }}</h5>
+                <a href="{% url 'article_detail' article.pk %}"><h5
+                        class="card-title text-decoration-none ">{{ article.title }}</h5></a>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ article.author }} | {{ article.date }}</h6>
                 <p class="card-text">{{ article.body }}</p>
+                <div>
+                    <a href="{% url 'article_comment' article.pk %}"><p>Comment</p></a>
+                    {% for comment in article_comment %}
+                        {% if comment.article_id == article.pk %}
+                            <p>{{ comment.author }} | {{ comment.date }}</p>
+                            <p>{{ comment.body }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
                 <a class="d-inline card link btn btn-outline-secondary text-decoration-none p-2 m-2"
                    href="{% url 'home' %}">Home</a>
                 <a href="{% url 'article_update' article.pk %}"
@@ -26,7 +36,7 @@
                    class="d-inline card-link btn btn-outline-secondary text-decoration-none p-2 m-2">Delete</a>
             </div>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
+        {% if forloop.counter|divisibleby:2 %}
             </div>
             <div class="row mx-auto">
         {% endif %}
